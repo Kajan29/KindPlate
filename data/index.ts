@@ -1,0 +1,1 @@
+export { mockFoodItems } from "./mockFood";

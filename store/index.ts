@@ -1,0 +1,1 @@
+export { useFoodStore } from "./foodStore";
