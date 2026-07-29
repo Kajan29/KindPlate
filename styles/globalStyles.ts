@@ -1,53 +1,23 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "@constants/Colors";
+import { Colors, Radius, Shadows, Spacing } from "@constants/index";
 
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background,
   },
+  screen: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
   content: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 16,
+    paddingHorizontal: Spacing.container,
+    paddingTop: Spacing.gutter,
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: Colors.textPrimary,
-    marginBottom: 16,
-  },
-  subheading: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: Colors.textPrimary,
-    marginBottom: 12,
-  },
-  body: {
-    fontSize: 16,
-    color: Colors.textSecondary,
-    lineHeight: 24,
-  },
-  caption: {
-    fontSize: 12,
-    color: Colors.textLight,
-  },
-  emptyText: {
-    fontSize: 16,
-    color: Colors.textSecondary,
-    textAlign: "center",
-    marginTop: 40,
-  },
-  card: {
-    backgroundColor: Colors.surface,
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: Colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    elevation: 3,
+  scrollContent: {
+    paddingHorizontal: Spacing.container,
+    paddingBottom: 120,
   },
   row: {
     flexDirection: "row",
@@ -62,26 +32,22 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
-    backgroundColor: Colors.primary,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  input: {
-    backgroundColor: Colors.surface,
+  card: {
+    backgroundColor: Colors.surfaceContainerLowest,
+    borderRadius: Radius.card,
+    padding: Spacing.gutter,
     borderWidth: 1,
-    borderColor: Colors.border,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    fontSize: 16,
-    color: Colors.textPrimary,
+    borderColor: Colors.outlineVariant + "55",
+    ...Shadows.soft,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: Colors.outlineVariant + "55",
+  },
+  emptyText: {
+    fontSize: 15,
+    color: Colors.onSurfaceVariant,
+    textAlign: "center",
+    marginTop: Spacing.xl,
   },
 });

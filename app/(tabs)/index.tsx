@@ -1,29 +1,32 @@
-import { View, Text, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { globalStyles } from "@styles/globalStyles";
-import { FoodCard } from "@components/FoodCard";
-import { useFoodStore } from "@store/foodStore";
+import { DonorDashboard } from "@components/dashboards/DonorDashboard";
+import { VolunteerDashboard } from "@components/dashboards/VolunteerDashboard";
+import { RecipientDashboard } from "@components/dashboards/RecipientDashboard";
+import { NgoDashboard } from "@components/dashboards/NgoDashboard";
+import { ActivityChooser } from "@components/ActivityChooser";
+import { useUserStore } from "@store/useUserStore";
 
+/**
+ * The Home tab. New users register as a normal user and first see the activity
+ * chooser (Donate / Volunteer / Inform a Place). Once they pick, the matching
+ * dashboard is shown. Volunteering can be as an NGO/committee or an individual.
+ */
 export default function HomeScreen() {
-  const { foodItems } = useFoodStore();
+  const role = useUserStore((s) => s.user.role);
+  const activityChosen = useUserStore((s) => s.activityChosen);
 
-  return (
-    <SafeAreaView style={globalStyles.container}>
-      <View style={globalStyles.content}>
-        <Text style={globalStyles.heading}>Available Food Near You</Text>
-        <FlatList
-          data={foodItems}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <FoodCard food={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 20 }}
-          ListEmptyComponent={
-            <Text style={globalStyles.emptyText}>
-              No food available right now. Check back later!
-            </Text>
-          }
-        />
-      </View>
-    </SafeAreaView>
-  );
+  if (!activityChosen) {
+    return <ActivityChooser />;
+  }
+
+  switch (role) {
+    case "volunteer":
+      return <VolunteerDashboard />;
+    case "recipient":
+      return <RecipientDashboard />;
+    case "ngo":
+      return <NgoDashboard />;
+    case "donor":
+    default:
+      return <DonorDashboard />;
+  }
 }

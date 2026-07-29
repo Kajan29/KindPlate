@@ -15,21 +15,23 @@ A community-driven food sharing app built with React Native and Expo. Share your
 ```
 ├── app/                # Screens & Navigation (Expo Router)
 │   ├── _layout.tsx     # Root Stack navigator
+│   ├── index.tsx       # Onboarding carousel (3 slides)
+│   ├── login.tsx       # Role selection + login
 │   └── (tabs)/         # Tab-based screens
-│       ├── index.tsx   # Home - Available food nearby
-│       ├── explore.tsx # Explore community food
-│       ├── share.tsx   # Share your food
+│       ├── index.tsx   # Home - Donor dashboard
+│       ├── donate.tsx  # Post a donation
+│       ├── map.tsx     # Kindness map (needs & surplus)
+│       ├── impact.tsx  # Community impact
 │       └── profile.tsx # User profile
 ├── assets/             # Images, Icons, Fonts
-├── components/         # Reusable UI Components
-├── constants/          # Colors, Routes, Config
-├── data/               # Mock Data
+├── components/         # Reusable UI Components (GlassCard, DonationCard, ...)
+├── constants/          # Colors, Theme, Config
+├── data/               # Mock Data (donations, needs, stories, badges)
 ├── hooks/              # Custom Hooks
-├── services/           # API & Data Services
+├── services/           # Service layer (mock-backed)
 ├── store/              # State Management (Zustand)
 ├── styles/             # Global Styles & Theme
-├── types/              # TypeScript Interfaces
-└── utils/              # Helper Functions
+└── types/              # TypeScript Interfaces
 ```
 
 ## Getting Started
@@ -66,20 +68,26 @@ npx expo start
 The project uses path aliases for cleaner imports:
 
 ```typescript
-import { FoodCard } from "@components/FoodCard";
-import { Colors } from "@constants/Colors";
-import { useFoodStore } from "@store/foodStore";
+import { DonationCard, GlassCard } from "@components/index";
+import { Colors } from "@constants/index";
+import { useDonationStore } from "@store/useDonationStore";
+import { useUserStore } from "@store/useUserStore";
 ```
 
 Available aliases: `@components`, `@constants`, `@data`, `@hooks`, `@services`, `@store`, `@styles`, `@types`, `@utils`, `@assets`
 
 ## Features
 
-- Browse available food near you
-- Share surplus food with your community
-- Search and explore food listings
-- User profiles with ratings and history
-- Distance-based food discovery
+- Onboarding + role-based login (Donor, Volunteer, Recipient, NGO)
+- Donor dashboard with points, rank, active donations and demand hotspots
+- Post a donation with category, quantity, expiry and safety guidelines
+- Kindness map showing live needs and surplus across Jaffna
+- Community impact dashboard with collective stats and stories
+- Profile with badges, contribution stats and multilingual support (English, Tamil, Sinhala)
+- Runs entirely on in-memory mock data — no backend configuration required
+
+> The UI implements the KindPlate design system: Deep Maroon + Deep Teal + Sage
+> palette, glassmorphic surfaces and extra-rounded shapes.
 
 ## Scripts
 

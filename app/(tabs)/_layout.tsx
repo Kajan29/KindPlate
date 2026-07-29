@@ -1,42 +1,61 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "@constants/Colors";
+import { Platform, StyleSheet } from "react-native";
+import { Colors } from "@constants/index";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.textSecondary,
-        headerStyle: { backgroundColor: Colors.primary },
-        headerTintColor: Colors.white,
-        headerTitleStyle: { fontWeight: "bold" },
+        headerShown: false,
+        tabBarActiveTintColor: Colors.onSecondaryContainer,
+        tabBarInactiveTintColor: Colors.onSurfaceVariant,
+        tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.label,
+        tabBarItemStyle: styles.item,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="donate"
         options={{
-          title: "Explore",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="search-outline" size={size} color={color} />
+          title: "Donate",
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "add-circle" : "add-circle-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="share"
+        name="map"
         options={{
-          title: "Share Food",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="add-circle-outline" size={size} color={color} />
+          title: "Map",
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "map" : "map-outline"} size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="impact"
+        options={{
+          title: "Impact",
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "stats-chart" : "stats-chart-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -44,11 +63,36 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? "person" : "person-outline"} size={size} color={color} />
           ),
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    position: "absolute",
+    backgroundColor: "rgba(255,248,247,0.96)",
+    borderTopWidth: 0,
+    height: Platform.OS === "ios" ? 84 : 68,
+    paddingTop: 8,
+    paddingBottom: Platform.OS === "ios" ? 26 : 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    shadowColor: Colors.secondary,
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 12,
+  },
+  label: {
+    fontSize: 11,
+    fontWeight: "600",
+  },
+  item: {
+    paddingTop: 2,
+  },
+});

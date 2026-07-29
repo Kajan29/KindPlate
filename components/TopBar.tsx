@@ -1,0 +1,106 @@
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { Colors, Spacing } from "@constants/index";
+
+interface TopBarProps {
+  avatarUrl?: string;
+  onNotifications?: () => void;
+  showNotificationDot?: boolean;
+}
+
+/** Sticky glass app bar with the KindPlate wordmark. */
+export function TopBar({ avatarUrl, onNotifications, showNotificationDot = true }: TopBarProps) {
+  const router = useRouter();
+  const handleNotifications =
+    onNotifications ?? (() => router.push("/notifications"));
+  return (
+    <View style={styles.bar}>
+      <View style={styles.left}>
+        <View style={styles.logoDot}>
+          <Text style={styles.logoEmoji}>🥘</Text>
+        </View>
+        <Text style={styles.title}>KindPlate</Text>
+      </View>
+      <View style={styles.right}>
+        <Pressable
+          onPress={handleNotifications}
+          accessibilityRole="button"
+          accessibilityLabel="Notifications"
+          style={({ pressed }) => [styles.iconBtn, pressed && styles.pressed]}
+        >
+          <Ionicons name="notifications-outline" size={22} color={Colors.secondary} />
+          {showNotificationDot && <View style={styles.dot} />}
+        </Pressable>
+        {avatarUrl && (
+          <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+        )}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  bar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: Spacing.container,
+    paddingVertical: 10,
+    backgroundColor: "rgba(255,248,247,0.92)",
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.outlineVariant + "44",
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  logoDot: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: Colors.surfaceContainerLowest,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: Colors.outlineVariant + "66",
+  },
+  logoEmoji: {
+    fontSize: 18,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: Colors.primary,
+  },
+  right: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  iconBtn: {
+    padding: 6,
+    borderRadius: 999,
+  },
+  pressed: {
+    opacity: 0.6,
+  },
+  dot: {
+    position: "absolute",
+    top: 6,
+    right: 6,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: Colors.error,
+  },
+  avatar: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    borderWidth: 2,
+    borderColor: Colors.secondary,
+    marginLeft: 4,
+  },
+});
