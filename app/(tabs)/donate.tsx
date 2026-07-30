@@ -11,8 +11,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { AppButton, GlassCard, TopBar } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { AppButton, GlassCard, ScreenBackground, TopBar } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { CATEGORY_META, MockImages } from "@data/index";
 import { useDonationStore } from "@store/useDonationStore";
 import { useAdminStore } from "@store/useAdminStore";
@@ -80,7 +80,7 @@ export default function DonateScreen() {
   };
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={undefined} showNotificationDot={false} />
       </SafeAreaView>
@@ -234,14 +234,17 @@ export default function DonateScreen() {
           style={styles.submit}
         />
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.lg,
     paddingBottom: 140,

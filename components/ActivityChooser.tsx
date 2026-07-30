@@ -3,7 +3,8 @@ import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { TopBar } from "./TopBar";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { ScreenBackground } from "./ScreenBackground";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 import { UserRole } from "@/types/food";
 
@@ -72,7 +73,7 @@ export function ActivityChooser() {
   };
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -161,14 +162,21 @@ export function ActivityChooser() {
           </Pressable>
         </Pressable>
       </Modal>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: Spacing.lg, paddingBottom: 120 },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: Spacing.lg,
+    paddingBottom: 120,
+  },
   hello: { fontSize: 16, fontWeight: "600", color: Colors.secondary },
   title: { fontSize: 26, fontWeight: "700", color: Colors.primary, marginTop: 6 },
   subtitle: { fontSize: 14, color: Colors.onSurfaceVariant, marginTop: 8, lineHeight: 20 },

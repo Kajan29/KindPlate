@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors, Radius } from "@constants/index";
+import { Colors, Radius, fontScale, moderateScale } from "@constants/index";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost";
 
@@ -62,11 +62,11 @@ export function AppButton({
       ) : (
         <View style={styles.inner}>
           {icon && !iconRight && (
-            <Ionicons name={icon} size={20} color={palette.text} />
+            <Ionicons name={icon} size={moderateScale(20)} color={palette.text} />
           )}
           <Text style={[styles.label, { color: palette.text }]}>{label}</Text>
           {icon && iconRight && (
-            <Ionicons name={icon} size={20} color={palette.text} />
+            <Ionicons name={icon} size={moderateScale(20)} color={palette.text} />
           )}
         </View>
       )}
@@ -83,11 +83,12 @@ const VARIANTS: Record<Variant, { bg: string; text: string; border: string }> = 
 
 const styles = StyleSheet.create({
   base: {
-    height: 54,
+    minHeight: moderateScale(56),
     borderRadius: Radius.button,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 24,
+    paddingHorizontal: moderateScale(24),
+    paddingVertical: moderateScale(8),
     borderWidth: 0,
   },
   outline: {
@@ -106,10 +107,11 @@ const styles = StyleSheet.create({
   inner: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    justifyContent: "center",
+    gap: moderateScale(8),
   },
   label: {
-    fontSize: 16,
+    fontSize: fontScale(16),
     fontWeight: "700",
   },
 });

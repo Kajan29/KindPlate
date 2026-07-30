@@ -1,7 +1,9 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Platform, StyleSheet } from "react-native";
-import { Colors } from "@constants/index";
+import { Colors, fontScale, moderateScale } from "@constants/index";
+
+const TAB_ICON = moderateScale(26);
 
 export default function TabLayout() {
   return (
@@ -19,8 +21,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={TAB_ICON} color={color} />
           ),
         }}
       />
@@ -77,9 +79,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "rgba(255,248,247,0.96)",
     borderTopWidth: 0,
-    height: Platform.OS === "ios" ? 84 : 68,
-    paddingTop: 8,
-    paddingBottom: Platform.OS === "ios" ? 26 : 10,
+    height: Platform.OS === "ios" ? moderateScale(84) : moderateScale(70),
+    paddingTop: moderateScale(8),
+    paddingBottom: Platform.OS === "ios" ? moderateScale(26) : moderateScale(12),
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: Colors.secondary,
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   label: {
-    fontSize: 11,
+    fontSize: fontScale(11),
     fontWeight: "600",
   },
   item: {

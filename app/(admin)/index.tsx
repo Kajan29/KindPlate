@@ -3,8 +3,8 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { CountdownBadge, GlassCard, TopBar } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { CountdownBadge, GlassCard, ScreenBackground, TopBar } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 import { useAdminStore, isPendingReview } from "@store/useAdminStore";
 import { ADMIN_STATUS_META, DONOR_KIND_META, heatZones } from "@data/index";
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -169,14 +169,21 @@ export default function AdminDashboard() {
           })}
         </GlassCard>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: Spacing.lg, paddingBottom: 120 },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: Spacing.lg,
+    paddingBottom: 120,
+  },
   title: { fontSize: 26, fontWeight: "700", color: Colors.primary },
   subtitle: { fontSize: 14, color: Colors.onSurfaceVariant, marginTop: 4, marginBottom: 18 },
   searchBar: {

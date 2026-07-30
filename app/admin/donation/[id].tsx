@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { AppButton, Badge, CountdownBadge, GlassCard, ScreenHeader } from "@components/index";
+import { AppButton, Badge, CountdownBadge, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
 import { Colors, Radius, Spacing } from "@constants/index";
 import { ADMIN_STATUS_META, CATEGORY_META, DONOR_KIND_META } from "@data/index";
 import { useAdminStore } from "@store/useAdminStore";
@@ -37,14 +37,14 @@ export default function DonationDetailScreen() {
 
   if (!donation) {
     return (
-      <View style={styles.root}>
+      <ScreenBackground>
         <ScreenHeader title="Donation" />
         <View style={styles.missing}>
           <Ionicons name="alert-circle-outline" size={48} color={Colors.onSurfaceVariant} />
           <Text style={styles.missingText}>This donation is no longer available.</Text>
           <AppButton label="Back to queue" variant="outline" fullWidth={false} onPress={() => router.back()} />
         </View>
-      </View>
+      </ScreenBackground>
     );
   }
 
@@ -79,7 +79,7 @@ export default function DonationDetailScreen() {
   };
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader
         title="Donation Review"
         subtitle={`#${donation.id.toUpperCase()}`}
@@ -325,7 +325,7 @@ export default function DonationDetailScreen() {
           )}
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 

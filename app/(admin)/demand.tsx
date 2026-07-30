@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { GlassCard, TopBar } from "@components/index";
+import { GlassCard, ScreenBackground, TopBar } from "@components/index";
 import LiveMap, { type LiveMapMarker } from "@components/LiveMap";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 import { heatZones } from "@data/index";
 import { HeatZone } from "@/types/food";
@@ -40,7 +40,7 @@ export default function DemandScreen() {
   }));
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -151,7 +151,7 @@ export default function DemandScreen() {
           </View>
         )}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -167,10 +167,13 @@ function ZoneStat({ icon, label, value }: { icon: IoniconName; label: string; va
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   titleRow: {
     flexDirection: "row",
     alignItems: "center",
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.md,
     gap: 12,
@@ -193,7 +196,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   toggleBtnActive: { backgroundColor: Colors.primaryContainer },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: 16, paddingBottom: 120 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: 16,
+    paddingBottom: 120,
+  },
   mapCanvas: {
     height: 340,
     borderRadius: Radius.xl,

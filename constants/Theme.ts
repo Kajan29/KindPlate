@@ -1,29 +1,33 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "./Colors";
+import { fontScale, moderateScale } from "../utils/responsive";
 
 /**
- * Vertical rhythm & spacing — everything in multiples of 8px.
+ * Vertical rhythm & spacing — an 8px base scale, now responsive. Values grow a
+ * little on big phones / tablets and shrink slightly on small phones so nothing
+ * overflows and the layout breathes consistently on every screen size.
  */
 export const Spacing = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  gutter: 16,
-  container: 20,
-  lg: 24,
-  xl: 32,
-  xxl: 48,
+  xs: moderateScale(4),
+  sm: moderateScale(8),
+  md: moderateScale(12),
+  gutter: moderateScale(16),
+  container: moderateScale(20),
+  lg: moderateScale(24),
+  xl: moderateScale(32),
+  xxl: moderateScale(48),
 } as const;
 
 /**
  * "Extra rounded" shape language to keep the brand feeling approachable.
+ * Radii scale gently (factor 0.35) so corners stay proportional to content.
  */
 export const Radius = {
-  sm: 8,
-  input: 12,
-  card: 16,
-  button: 24,
-  xl: 28,
+  sm: moderateScale(8, 0.35),
+  input: moderateScale(12, 0.35),
+  card: moderateScale(16, 0.35),
+  button: moderateScale(24, 0.35),
+  xl: moderateScale(28, 0.35),
   pill: 9999,
 } as const;
 
@@ -57,62 +61,63 @@ export const Shadows = {
 /**
  * Type scale. Poppins is used for headlines and Inter for body in the design
  * system; we map to platform system fonts and preserve the size / weight
- * hierarchy so the layout stays faithful.
+ * hierarchy so the layout stays faithful. Font sizes and line heights are now
+ * responsive (capped) so text stays legible and proportional on any device.
  */
 export const Typography = StyleSheet.create({
   headlineXl: {
-    fontSize: 30,
-    lineHeight: 36,
+    fontSize: fontScale(30),
+    lineHeight: fontScale(36),
     fontWeight: "700",
     letterSpacing: -0.4,
     color: Colors.onSurface,
   },
   headlineLg: {
-    fontSize: 26,
-    lineHeight: 34,
+    fontSize: fontScale(26),
+    lineHeight: fontScale(34),
     fontWeight: "700",
     color: Colors.onSurface,
   },
   headlineMd: {
-    fontSize: 24,
-    lineHeight: 32,
+    fontSize: fontScale(24),
+    lineHeight: fontScale(32),
     fontWeight: "700",
     color: Colors.onSurface,
   },
   headlineSm: {
-    fontSize: 20,
-    lineHeight: 28,
+    fontSize: fontScale(20),
+    lineHeight: fontScale(28),
     fontWeight: "600",
     color: Colors.onSurface,
   },
   bodyLg: {
-    fontSize: 18,
-    lineHeight: 28,
+    fontSize: fontScale(18),
+    lineHeight: fontScale(28),
     fontWeight: "400",
     color: Colors.onSurface,
   },
   bodyMd: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: fontScale(16),
+    lineHeight: fontScale(24),
     fontWeight: "400",
     color: Colors.onSurface,
   },
   bodySm: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: fontScale(14),
+    lineHeight: fontScale(20),
     fontWeight: "400",
     color: Colors.onSurfaceVariant,
   },
   labelMd: {
-    fontSize: 13,
-    lineHeight: 16,
+    fontSize: fontScale(13),
+    lineHeight: fontScale(16),
     fontWeight: "600",
     letterSpacing: 0.6,
     color: Colors.onSurfaceVariant,
   },
   caption: {
-    fontSize: 11,
-    lineHeight: 14,
+    fontSize: fontScale(11),
+    lineHeight: fontScale(14),
     fontWeight: "400",
     color: Colors.onSurfaceVariant,
   },

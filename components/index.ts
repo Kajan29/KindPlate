@@ -1,4 +1,5 @@
 export { GlassCard } from "./GlassCard";
+export { ScreenBackground } from "./ScreenBackground";
 export { AppButton } from "./AppButton";
 export { Badge } from "./Badge";
 export { StatCard } from "./StatCard";

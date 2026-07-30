@@ -1,8 +1,8 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { AppButton, Badge, GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { AppButton, Badge, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useDonationStore } from "@store/useDonationStore";
 import { CATEGORY_META } from "@data/index";
 import { DonationStatus } from "@/types/food";
@@ -25,13 +25,13 @@ export default function DonationDetailScreen() {
 
   if (!donation) {
     return (
-      <View style={styles.root}>
+      <ScreenBackground>
         <ScreenHeader title="Donation" />
         <View style={styles.missing}>
           <Ionicons name="fast-food-outline" size={48} color={Colors.outline} />
           <Text style={styles.missingText}>This donation could not be found.</Text>
         </View>
-      </View>
+      </ScreenBackground>
     );
   }
 
@@ -39,7 +39,7 @@ export default function DonationDetailScreen() {
   const canAssign = donation.status === "pending";
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="Donation Details" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.imageWrap}>
@@ -102,7 +102,7 @@ export default function DonationDetailScreen() {
           </View>
         )}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -128,7 +128,13 @@ function InfoRow({
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { padding: Spacing.container, paddingBottom: 40 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    padding: Spacing.container,
+    paddingBottom: 40,
+  },
   missing: { flex: 1, alignItems: "center", justifyContent: "center", gap: 12 },
   missingText: { fontSize: 15, color: Colors.onSurfaceVariant },
   imageWrap: { borderRadius: Radius.xl, overflow: "hidden", height: 220, marginBottom: 18 },

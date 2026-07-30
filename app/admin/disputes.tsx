@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Badge, GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Badge, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useAdminStore } from "@store/useAdminStore";
 import { DisputeCase } from "@/types/food";
 
@@ -36,7 +36,7 @@ export default function DisputesScreen() {
   const open = cases.filter((c) => c.status === "open").length;
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="Dispute Resolution" subtitle={`${open} open case${open === 1 ? "" : "s"}`} />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -119,7 +119,7 @@ export default function DisputesScreen() {
           );
         })}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -131,7 +131,15 @@ function sevColor(sev: DisputeCase["severity"]) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: 16, paddingBottom: 40, gap: 14 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: 16,
+    paddingBottom: 40,
+    gap: 14,
+  },
   card: { gap: 0, padding: 0, overflow: "hidden" },
   cardHead: { flexDirection: "row", alignItems: "center", gap: 12, padding: 16 },
   sevDot: { width: 12, height: 12, borderRadius: 6 },

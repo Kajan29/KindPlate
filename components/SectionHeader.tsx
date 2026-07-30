@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Colors } from "@constants/index";
+import { Colors, fontScale, moderateScale } from "@constants/index";
 
 interface SectionHeaderProps {
   title: string;
@@ -12,7 +12,7 @@ export function SectionHeader({ title, actionLabel, onAction }: SectionHeaderPro
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
       {actionLabel && (
-        <Pressable onPress={onAction} accessibilityRole="button">
+        <Pressable onPress={onAction} accessibilityRole="button" hitSlop={8}>
           <Text style={styles.action}>{actionLabel}</Text>
         </Pressable>
       )}
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 14,
+    marginBottom: moderateScale(14),
   },
   title: {
-    fontSize: 20,
+    fontSize: fontScale(20),
     fontWeight: "700",
     color: Colors.secondary,
   },
   action: {
-    fontSize: 13,
+    fontSize: fontScale(13),
     fontWeight: "700",
     color: Colors.secondary,
     letterSpacing: 0.3,

@@ -1,17 +1,19 @@
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { AppButton } from "../AppButton";
 import { DonationCard } from "../DonationCard";
 import { GlassCard } from "../GlassCard";
+import LiveMap, { type LiveMapMarker } from "../LiveMap";
+import { ScreenBackground } from "../ScreenBackground";
 import { SectionHeader } from "../SectionHeader";
 import { StatCard } from "../StatCard";
 import { TopBar } from "../TopBar";
-import { AppImages, Colors, Radius, Spacing } from "@constants/index";
+import { AppImages, Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useDonationStore } from "@store/useDonationStore";
 import { useUserStore } from "@store/useUserStore";
-import { hotspots } from "@data/index";
+import { hotspots, mapPins } from "@data/index";
 
 export function DonorDashboard() {
   const router = useRouter();
@@ -20,8 +22,19 @@ export function DonorDashboard() {
   const firstName = user.name.split(" ")[0];
   const topHotspot = hotspots[0];
 
+  const hotspotMarkers: LiveMapMarker[] = mapPins.map((pin) => ({
+    id: pin.id,
+    latitude: pin.latitude,
+    longitude: pin.longitude,
+    color: pin.type === "surplus" ? Colors.secondary : Colors.primary,
+    icon: pin.type === "surplus" ? "gift" : "restaurant",
+    title: pin.title,
+    description: pin.actionText,
+    emphasize: pin.urgency === "critical",
+  }));
+
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -82,11 +95,14 @@ export function DonorDashboard() {
             </View>
           </View>
 
-          <View style={styles.mapPreview}>
-            <View style={[styles.heat, styles.heatA]} />
-            <View style={[styles.heat, styles.heatB]} />
-            <View style={styles.road1} />
-            <View style={styles.road2} />
+          <Pressable style={styles.mapPreview} onPress={() => router.push("/(tabs)/map")}>
+            <View style={StyleSheet.absoluteFill} pointerEvents="none">
+              <LiveMap
+                markers={hotspotMarkers}
+                activeId={mapPins[0].id}
+                onSelect={() => router.push("/(tabs)/map")}
+              />
+            </View>
 
             <GlassCard style={styles.floatingCard}>
               <View style={styles.floatingRow}>
@@ -101,7 +117,7 @@ export function DonorDashboard() {
                 </View>
               </View>
             </GlassCard>
-          </View>
+          </Pressable>
 
           <AppButton
             label="Open Kindness Map"
@@ -112,14 +128,17 @@ export function DonorDashboard() {
           />
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.lg,
     paddingBottom: 120,
@@ -166,27 +185,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.outlineVariant + "55",
     overflow: "hidden",
     justifyContent: "flex-end",
-  },
-  heat: { position: "absolute", borderRadius: 999 },
-  heatA: { width: 130, height: 130, top: 20, left: 40, backgroundColor: "rgba(186,26,26,0.18)" },
-  heatB: { width: 150, height: 150, bottom: 30, right: 20, backgroundColor: "rgba(186,26,26,0.14)" },
-  road1: {
-    position: "absolute",
-    height: 6,
-    width: "140%",
-    top: 90,
-    left: -20,
-    backgroundColor: Colors.secondary + "22",
-    transform: [{ rotate: "-12deg" }],
-  },
-  road2: {
-    position: "absolute",
-    width: 6,
-    height: "140%",
-    left: "48%",
-    top: -20,
-    backgroundColor: Colors.secondary + "22",
-    transform: [{ rotate: "8deg" }],
   },
   floatingCard: { margin: 12 },
   floatingRow: { flexDirection: "row", alignItems: "center", gap: 12 },

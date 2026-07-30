@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Badge, GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Badge, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useAdminStore } from "@store/useAdminStore";
 import { ManagedUser, UserRole } from "@/types/food";
 
@@ -33,7 +33,7 @@ export default function UsersScreen() {
   const list = useMemo(() => users.filter((u) => u.role === tab), [users, tab]);
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="User & Role Management" subtitle="Verify, approve and moderate" />
 
       <ScrollView
@@ -128,13 +128,20 @@ export default function UsersScreen() {
           })
         )}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  tabRow: { gap: 8, paddingHorizontal: Spacing.container, paddingVertical: 14 },
+  tabRow: {
+    gap: 8,
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingVertical: 14,
+  },
   tab: {
     flexDirection: "row",
     alignItems: "center",
@@ -149,7 +156,14 @@ const styles = StyleSheet.create({
   tabActive: { backgroundColor: Colors.primaryContainer, borderColor: Colors.primaryContainer },
   tabText: { fontSize: 13, fontWeight: "700", color: Colors.secondary },
   tabTextActive: { color: Colors.onPrimary },
-  scroll: { paddingHorizontal: Spacing.container, paddingBottom: 40, gap: 14 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingBottom: 40,
+    gap: 14,
+  },
   empty: { alignItems: "center", gap: 12, padding: 32, marginTop: 20 },
   emptyText: { fontSize: 15, color: Colors.onSurfaceVariant },
   card: { gap: 14 },

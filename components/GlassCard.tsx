@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Colors, Radius, Shadows } from "@constants/index";
+import { Colors, Radius, Shadows, moderateScale } from "@constants/index";
 
 interface GlassCardProps {
   children: ReactNode;
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     ...Shadows.soft,
   },
   padded: {
-    padding: 16,
+    padding: moderateScale(16),
   },
 });

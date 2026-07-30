@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 
 type IoniconName = keyof typeof Ionicons.glyphMap;
 
@@ -73,7 +73,7 @@ export default function NotificationsScreen() {
   const unread = NOTIFICATIONS.filter((n) => n.unread).length;
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader
         title="Notifications"
         subtitle={unread > 0 ? `${unread} unread` : "You're all caught up"}
@@ -106,13 +106,20 @@ export default function NotificationsScreen() {
         })}
         <Text style={styles.end}>That's everything for now.</Text>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { padding: Spacing.container, paddingBottom: 40, gap: 12 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    padding: Spacing.container,
+    paddingBottom: 40,
+    gap: 12,
+  },
   badge: {
     minWidth: 26,
     height: 26,

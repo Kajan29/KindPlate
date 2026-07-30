@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Colors, Spacing } from "@constants/index";
+import { Colors, Spacing, fontScale, moderateScale } from "@constants/index";
 
 interface ScreenHeaderProps {
   title: string;
@@ -22,7 +22,7 @@ export function ScreenHeader({ title, subtitle, right }: ScreenHeaderProps) {
           accessibilityLabel="Go back"
           hitSlop={8}
         >
-          <Ionicons name="chevron-back" size={22} color={Colors.primary} />
+          <Ionicons name="chevron-back" size={moderateScale(24)} color={Colors.primary} />
         </Pressable>
         <View style={styles.titleWrap}>
           <Text style={styles.title} numberOfLines={1}>
@@ -54,16 +54,16 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   back: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: moderateScale(44),
+    height: moderateScale(44),
+    borderRadius: moderateScale(22),
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.surfaceContainerHigh,
   },
   pressed: { opacity: 0.6 },
   titleWrap: { flex: 1 },
-  title: { fontSize: 18, fontWeight: "700", color: Colors.primary },
-  subtitle: { fontSize: 12, color: Colors.onSurfaceVariant },
-  right: { minWidth: 40, alignItems: "flex-end" },
+  title: { fontSize: fontScale(18), fontWeight: "700", color: Colors.primary },
+  subtitle: { fontSize: fontScale(12), color: Colors.onSurfaceVariant },
+  right: { minWidth: moderateScale(44), alignItems: "flex-end" },
 });

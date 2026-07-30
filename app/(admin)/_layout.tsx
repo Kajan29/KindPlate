@@ -1,7 +1,9 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Platform, StyleSheet } from "react-native";
-import { Colors } from "@constants/index";
+import { Colors, fontScale, moderateScale } from "@constants/index";
+
+const TAB_ICON = moderateScale(26);
 
 /**
  * Admin bottom navigation, per the admin design spec:
@@ -23,8 +25,8 @@ export default function AdminTabLayout() {
         name="index"
         options={{
           title: "Dashboard",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "grid" : "grid-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "grid" : "grid-outline"} size={TAB_ICON} color={color} />
           ),
         }}
       />
@@ -32,10 +34,10 @@ export default function AdminTabLayout() {
         name="review"
         options={{
           title: "Review",
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "clipboard" : "clipboard-outline"}
-              size={size}
+              size={TAB_ICON}
               color={color}
             />
           ),
@@ -45,8 +47,8 @@ export default function AdminTabLayout() {
         name="demand"
         options={{
           title: "Demand",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "flame" : "flame-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "flame" : "flame-outline"} size={TAB_ICON} color={color} />
           ),
         }}
       />
@@ -54,8 +56,8 @@ export default function AdminTabLayout() {
         name="points"
         options={{
           title: "Points",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "trophy" : "trophy-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "trophy" : "trophy-outline"} size={TAB_ICON} color={color} />
           ),
         }}
       />
@@ -63,8 +65,8 @@ export default function AdminTabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "person" : "person-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "person" : "person-outline"} size={TAB_ICON} color={color} />
           ),
         }}
       />
@@ -77,9 +79,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "rgba(255,248,247,0.96)",
     borderTopWidth: 0,
-    height: Platform.OS === "ios" ? 84 : 68,
-    paddingTop: 8,
-    paddingBottom: Platform.OS === "ios" ? 26 : 10,
+    height: Platform.OS === "ios" ? moderateScale(84) : moderateScale(70),
+    paddingTop: moderateScale(8),
+    paddingBottom: Platform.OS === "ios" ? moderateScale(26) : moderateScale(12),
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: Colors.secondary,
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   label: {
-    fontSize: 11,
+    fontSize: fontScale(11),
     fontWeight: "600",
   },
   item: {

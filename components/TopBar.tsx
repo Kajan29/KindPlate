@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Colors, Spacing } from "@constants/index";
+import { Colors, Spacing, fontScale, moderateScale } from "@constants/index";
 
 interface TopBarProps {
   avatarUrl?: string;
@@ -29,7 +29,7 @@ export function TopBar({ avatarUrl, onNotifications, showNotificationDot = true 
           accessibilityLabel="Notifications"
           style={({ pressed }) => [styles.iconBtn, pressed && styles.pressed]}
         >
-          <Ionicons name="notifications-outline" size={22} color={Colors.secondary} />
+          <Ionicons name="notifications-outline" size={moderateScale(24)} color={Colors.secondary} />
           {showNotificationDot && <View style={styles.dot} />}
         </Pressable>
         {avatarUrl && (
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   logoDot: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+    width: moderateScale(38),
+    height: moderateScale(38),
+    borderRadius: moderateScale(19),
     backgroundColor: Colors.surfaceContainerLowest,
     alignItems: "center",
     justifyContent: "center",
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
     borderColor: Colors.outlineVariant + "66",
   },
   logoEmoji: {
-    fontSize: 18,
+    fontSize: fontScale(19),
   },
   title: {
-    fontSize: 22,
+    fontSize: fontScale(22),
     fontWeight: "700",
     color: Colors.primary,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   iconBtn: {
-    padding: 6,
+    padding: moderateScale(8),
     borderRadius: 999,
   },
   pressed: {
@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.error,
   },
   avatar: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+    width: moderateScale(40),
+    height: moderateScale(40),
+    borderRadius: moderateScale(20),
     borderWidth: 2,
     borderColor: Colors.secondary,
     marginLeft: 4,

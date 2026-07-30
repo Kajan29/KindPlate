@@ -3,8 +3,9 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { GlassCard } from "../GlassCard";
+import { ScreenBackground } from "../ScreenBackground";
 import { TopBar } from "../TopBar";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 import { approvalQueue, heatZones, ngoSummary, orgLeaderboard } from "@data/index";
 import { ApprovalItem } from "@/types/food";
@@ -16,7 +17,7 @@ export function NgoDashboard() {
   const decide = (id: string) => setQueue((q) => q.filter((item) => item.id !== id));
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -149,7 +150,7 @@ export function NgoDashboard() {
           </GlassCard>
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -162,8 +163,15 @@ function rankStyle(rank: number) {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: Spacing.lg, paddingBottom: 120 },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: Spacing.lg,
+    paddingBottom: 120,
+  },
   pageTitle: { fontSize: 26, fontWeight: "700", color: Colors.primary, marginBottom: 16 },
   bento: { flexDirection: "row", gap: 12, marginBottom: 28 },
   impactCard: { flex: 1.4, padding: 18, justifyContent: "space-between" },

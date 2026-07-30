@@ -2,8 +2,8 @@ import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-nati
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Badge, GlassCard, TopBar } from "@components/index";
-import { Colors, Config, Radius, Spacing } from "@constants/index";
+import { Badge, GlassCard, ScreenBackground, TopBar } from "@components/index";
+import { Colors, Config, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { badges } from "@data/index";
 import { useUserStore } from "@store/useUserStore";
 
@@ -76,7 +76,7 @@ export default function ProfileScreen() {
   ];
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -169,14 +169,17 @@ export default function ProfileScreen() {
         </Pressable>
         <Text style={styles.version}>KindPlate Version {Config.APP_VERSION}</Text>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.lg,
     paddingBottom: 120,

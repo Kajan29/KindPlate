@@ -12,8 +12,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { CountdownBadge, GlassCard, TopBar } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { CountdownBadge, GlassCard, ScreenBackground, TopBar } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 import { CATEGORY_META, DONOR_KIND_META } from "@data/index";
 import { useAdminStore, isPendingReview } from "@store/useAdminStore";
@@ -72,7 +72,7 @@ export default function ReviewQueueScreen() {
   const pendingCount = reviewQueue.filter(isPendingReview).length;
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -241,17 +241,20 @@ export default function ReviewQueueScreen() {
           </View>
         </View>
       </Modal>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   titleRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.md,
   },
@@ -282,7 +285,14 @@ const styles = StyleSheet.create({
   filterChipActive: { backgroundColor: Colors.primaryContainer, borderColor: Colors.primaryContainer },
   filterText: { fontSize: 13, fontWeight: "700", color: Colors.secondary },
   filterTextActive: { color: Colors.onPrimary },
-  scroll: { paddingHorizontal: Spacing.container, paddingBottom: 120, gap: 16 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingBottom: 120,
+    gap: 16,
+  },
   card: { overflow: "hidden" },
   imgWrap: { height: 150, width: "100%" },
   img: { width: "100%", height: "100%", backgroundColor: Colors.surfaceContainerHigh },

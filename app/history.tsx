@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
-import { DonationCard, GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Spacing } from "@constants/index";
+import { DonationCard, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Spacing, maxContentWidth } from "@constants/index";
 import { useDonationStore } from "@store/useDonationStore";
 
 export default function HistoryScreen() {
@@ -12,7 +12,7 @@ export default function HistoryScreen() {
   const totalMeals = [...donations, ...history].reduce((sum, d) => sum + d.quantity, 0);
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="My Donations" subtitle={`${donations.length + history.length} contributions`} />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <GlassCard style={styles.summary}>
@@ -50,13 +50,19 @@ export default function HistoryScreen() {
           />
         ))}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { padding: Spacing.container, paddingBottom: 40 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    padding: Spacing.container,
+    paddingBottom: 40,
+  },
   summary: { flexDirection: "row", alignItems: "center", padding: 18, marginBottom: 20 },
   summaryItem: { flex: 1, alignItems: "center", gap: 4 },
   summaryValue: { fontSize: 24, fontWeight: "700", color: Colors.primary },

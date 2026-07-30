@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { GlassCard } from "../GlassCard";
+import { ScreenBackground } from "../ScreenBackground";
 import { TopBar } from "../TopBar";
 import { AppImages, Colors, Radius, Spacing } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
@@ -29,7 +30,7 @@ export function RecipientDashboard() {
   const progressPct = ((doneCount - 1) / (requestSteps.length - 1)) * 100;
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -133,13 +134,13 @@ export function RecipientDashboard() {
           ))}
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: { paddingBottom: 120 },
   hero: { height: 320, justifyContent: "flex-end" },
   heroOverlay: {

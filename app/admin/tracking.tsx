@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Badge, GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Badge, GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useAdminStore } from "@store/useAdminStore";
 
 type IoniconName = keyof typeof Ionicons.glyphMap;
@@ -17,7 +17,7 @@ const STEPS: { label: string; icon: IoniconName }[] = [
 export default function TrackingScreen() {
   const deliveries = useAdminStore((s) => s.deliveries);
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="Delivery Tracking" subtitle="Lifecycle & proof-of-delivery" />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -95,7 +95,7 @@ export default function TrackingScreen() {
           </GlassCard>
         ))}
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -113,7 +113,15 @@ function Party({ icon, label, value }: { icon: IoniconName; label: string; value
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { paddingHorizontal: Spacing.container, paddingTop: 16, paddingBottom: 40, gap: 16 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    paddingHorizontal: Spacing.container,
+    paddingTop: 16,
+    paddingBottom: 40,
+    gap: 16,
+  },
   card: { gap: 18 },
   head: { flexDirection: "row", alignItems: "flex-start", gap: 10 },
   flex: { flex: 1 },

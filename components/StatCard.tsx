@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { GlassCard } from "./GlassCard";
-import { Colors } from "@constants/index";
+import { Colors, fontScale, moderateScale } from "@constants/index";
 
 interface StatCardProps {
   label: string;
@@ -9,31 +9,36 @@ interface StatCardProps {
 }
 
 /** Small glass stat tile used in the dashboard header bento. */
-export function StatCard({ label, value, minWidth = 96 }: StatCardProps) {
+export function StatCard({ label, value, minWidth = moderateScale(96) }: StatCardProps) {
   return (
     <GlassCard style={[styles.card, { minWidth }]} padded={false}>
-      <Text style={styles.label}>{label.toUpperCase()}</Text>
-      <Text style={styles.value}>{value}</Text>
+      <Text style={styles.label} numberOfLines={1}>
+        {label.toUpperCase()}
+      </Text>
+      <Text style={styles.value} numberOfLines={1} adjustsFontSizeToFit>
+        {value}
+      </Text>
     </GlassCard>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    paddingVertical: 14,
-    paddingHorizontal: 16,
+    flex: 1,
+    paddingVertical: moderateScale(14),
+    paddingHorizontal: moderateScale(12),
     alignItems: "center",
     justifyContent: "center",
   },
   label: {
-    fontSize: 11,
+    fontSize: fontScale(11),
     fontWeight: "700",
     letterSpacing: 0.6,
     color: Colors.secondary,
-    marginBottom: 4,
+    marginBottom: moderateScale(4),
   },
   value: {
-    fontSize: 20,
+    fontSize: fontScale(20),
     fontWeight: "700",
     color: Colors.primary,
   },

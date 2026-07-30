@@ -1,5 +1,12 @@
 import { StyleSheet } from "react-native";
-import { Colors, Radius, Shadows, Spacing } from "@constants/index";
+import {
+  Colors,
+  Radius,
+  Shadows,
+  Spacing,
+  maxContentWidth,
+  moderateScale,
+} from "@constants/index";
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -17,7 +24,16 @@ export const globalStyles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: Spacing.container,
-    paddingBottom: 120,
+    paddingBottom: moderateScale(120),
+  },
+  /**
+   * Centers content and caps its width on tablets / wide web viewports so the
+   * layout never stretches uncomfortably across a large screen.
+   */
+  centeredContent: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
   },
   row: {
     flexDirection: "row",
@@ -45,7 +61,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: Colors.outlineVariant + "55",
   },
   emptyText: {
-    fontSize: 15,
+    fontSize: moderateScale(15),
     color: Colors.onSurfaceVariant,
     textAlign: "center",
     marginTop: Spacing.xl,

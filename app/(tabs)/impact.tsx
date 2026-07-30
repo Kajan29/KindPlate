@@ -1,8 +1,8 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
-import { Badge, GlassCard, SectionHeader, StoryCard, TopBar } from "@components/index";
-import { Colors, Radius, Spacing } from "@constants/index";
+import { Badge, GlassCard, ScreenBackground, SectionHeader, StoryCard, TopBar } from "@components/index";
+import { Colors, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { communityStories, impactStats, personalImpact } from "@data/index";
 import { useUserStore } from "@store/useUserStore";
 
@@ -38,7 +38,7 @@ export default function ImpactScreen() {
   ];
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -122,14 +122,17 @@ export default function ImpactScreen() {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
     paddingHorizontal: Spacing.container,
     paddingTop: Spacing.lg,
     paddingBottom: 120,

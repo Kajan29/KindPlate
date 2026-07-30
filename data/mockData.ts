@@ -83,11 +83,11 @@ export const CATEGORY_META: Record<
 };
 
 export const currentUser: User = {
-  id: "u_kajan",
-  name: "Kajan Ratnam",
+  id: "u_arthi",
+  name: "Arthi",
   role: "donor",
   roleLabel: "Community Donor",
-  avatarUrl: avatar(12),
+  avatarUrl: avatar(47),
   verified: true,
   points: 1240,
   rank: "#12",

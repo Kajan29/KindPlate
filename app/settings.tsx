@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { GlassCard, ScreenHeader } from "@components/index";
-import { Colors, Config, Radius, Spacing } from "@constants/index";
+import { GlassCard, ScreenBackground, ScreenHeader } from "@components/index";
+import { Colors, Config, Radius, Spacing, maxContentWidth } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
 
 type IoniconName = keyof typeof Ionicons.glyphMap;
@@ -30,7 +30,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <ScreenHeader title="Settings" subtitle="Preferences & account" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.group}>NOTIFICATIONS</Text>
@@ -92,7 +92,7 @@ export default function SettingsScreen() {
         </Pressable>
         <Text style={styles.version}>KindPlate {Config.APP_VERSION}</Text>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
@@ -157,7 +157,13 @@ function Divider() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  scroll: { padding: Spacing.container, paddingBottom: 40 },
+  scroll: {
+    width: "100%",
+    maxWidth: maxContentWidth,
+    alignSelf: "center",
+    padding: Spacing.container,
+    paddingBottom: 40,
+  },
   group: {
     fontSize: 12,
     fontWeight: "700",

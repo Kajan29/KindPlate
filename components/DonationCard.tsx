@@ -1,6 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors, Radius, Shadows } from "@constants/index";
+import { Colors, Radius, Shadows, fontScale, moderateScale } from "@constants/index";
 import { Donation, DonationStatus } from "@/types/food";
 import { Badge } from "./Badge";
 
@@ -53,13 +53,13 @@ export function DonationCard({ donation, onPress, horizontal = false }: Donation
           {donation.title}
         </Text>
         <View style={styles.metaRow}>
-          <Ionicons name={metaIcon} size={16} color={Colors.onSurfaceVariant} />
+          <Ionicons name={metaIcon} size={moderateScale(16)} color={Colors.onSurfaceVariant} />
           <Text style={styles.meta} numberOfLines={1}>
             {donation.expiresInLabel}
           </Text>
         </View>
         <View style={styles.metaRow}>
-          <Ionicons name="location-outline" size={14} color={Colors.secondary} />
+          <Ionicons name="location-outline" size={moderateScale(14)} color={Colors.secondary} />
           <Text style={styles.location} numberOfLines={1}>
             {donation.location.area}
             {donation.location.distanceKm
@@ -82,17 +82,17 @@ const styles = StyleSheet.create({
     ...Shadows.soft,
   },
   horizontal: {
-    width: 260,
+    width: moderateScale(260),
   },
   full: {
     width: "100%",
-    marginBottom: 14,
+    marginBottom: moderateScale(14),
   },
   pressed: {
     transform: [{ scale: 0.98 }],
   },
   imageWrap: {
-    height: 132,
+    height: moderateScale(132),
     width: "100%",
   },
   image: {
@@ -106,26 +106,26 @@ const styles = StyleSheet.create({
     right: 10,
   },
   body: {
-    padding: 14,
-    gap: 6,
+    padding: moderateScale(14),
+    gap: moderateScale(6),
   },
   title: {
-    fontSize: 16,
+    fontSize: fontScale(16),
     fontWeight: "700",
     color: Colors.primary,
   },
   metaRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 6,
+    gap: moderateScale(6),
   },
   meta: {
-    fontSize: 13,
+    fontSize: fontScale(13),
     color: Colors.onSurfaceVariant,
     flexShrink: 1,
   },
   location: {
-    fontSize: 12,
+    fontSize: fontScale(12),
     color: Colors.secondary,
     fontWeight: "600",
     flexShrink: 1,

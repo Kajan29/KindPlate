@@ -2,6 +2,7 @@ import { Image, ImageBackground, ScrollView, StyleSheet, Text, View } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { GlassCard } from "../GlassCard";
+import { ScreenBackground } from "../ScreenBackground";
 import { TopBar } from "../TopBar";
 import { AppImages, Colors, Radius, Spacing } from "@constants/index";
 import { useUserStore } from "@store/useUserStore";
@@ -19,7 +20,7 @@ export function VolunteerDashboard() {
   const firstName = user.name.split(" ")[0];
 
   return (
-    <View style={styles.root}>
+    <ScreenBackground>
       <SafeAreaView edges={["top"]} style={styles.headerSafe}>
         <TopBar avatarUrl={user.avatarUrl} />
       </SafeAreaView>
@@ -113,13 +114,13 @@ export function VolunteerDashboard() {
           />
         </View>
       </ScrollView>
-    </View>
+    </ScreenBackground>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Colors.background },
-  headerSafe: { backgroundColor: "rgba(255,248,247,0.92)" },
+  headerSafe: { backgroundColor: "rgba(255,248,247,0.82)" },
   scroll: { paddingBottom: 120 },
   hero: { height: 240, justifyContent: "flex-end" },
   heroImage: {},
